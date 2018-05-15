@@ -7,7 +7,7 @@ const octokit = require("@octokit/rest");
 const nacl = require("tweetnacl");
 nacl.util = require("tweetnacl-util");
 
-const username = "JohnJohnx4"; // TODO: Replace with your username
+const username = "AnthonyCatalfo"; // TODO: Replace with your username
 const github = octokit({ debug: true });
 const server = express();
 
@@ -151,11 +151,11 @@ server.post("/createsecret", urlencodedParser, (req, res) => {
 	let secretContents = nacl.secretbox(contents, nonce, encryption);
 	let encodeContents = nacl.util.encodeBase64(secretContents)
 
-	const files = {name: {content: encodeContents}};
+	const files = { name: { content: encodeContents } };
 	console.log(encodeContents);
 	//send to github
 	github.gists
-	.create({ files, public: false })
+		.create({ files, public: false })
 		.then(response => {
 			res.json(response.data);
 		})
